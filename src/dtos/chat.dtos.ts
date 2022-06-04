@@ -20,5 +20,5 @@ export interface ChatInterface extends Document {
 export interface Message {
     text: string,
     createdAt?: string,
-    image: string,
+    image?: string,
 };

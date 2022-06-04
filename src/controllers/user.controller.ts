@@ -4,20 +4,15 @@ import * as userService from "../services/user.service";
 export const Login = async (req: Request, res: Response) => {
     try {
         const { id, name, photo } = req.body;
-        if (id) {
-            const user = userService.fetchById(id);
-            if (!user)
-                return res.status(400).json({ message: "Invalid user id" });
-            return res.status(202).json({ user, message: "Success" });
-        } else if (!name) {
-            res.status(400).json({ message: `name is required` });
-        } else {
-            let user = await userService.fetchByName(name);
-            if (user)
-                return res.status(202).json({ user, message: "Success" });
-            user = await userService.create(name, photo);
-            return res.status(200).json({ user, message: "Success" });
+        //id must be given, for login as well as register
+        if (!id) {
+            res.status(400).json({ message: `your unique user id is required` });
         }
+        const user = await userService.fetchById(id);
+        if (user)
+            return res.status(202).json({ user, message: "Success" });
+        const newUser = await userService.create(id, name, photo);
+        return res.status(200).json({ newUser, message: "Success" });
     } catch (err) {
         res.status(500).json({ message: "Server Failure", err });
     }

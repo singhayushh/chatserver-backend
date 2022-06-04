@@ -7,7 +7,7 @@ const broadcastSchema: Schema<BroadcastInterface> = new Schema(
         createdAt: String, //message_creation_time
         image: String, //message_image_content
         user: {
-            _id: String, //sender_id
+            _id: Schema.Types.ObjectId, //sender_id
             name: String, //sender_name
             avatar: String //sender_photo
         },

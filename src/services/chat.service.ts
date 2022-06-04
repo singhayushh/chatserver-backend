@@ -6,12 +6,12 @@ export const fetchChatByUser = async (sender: string, receiver: string) => {
     return await Chat.findOne({
         $or: [
             {
-                receiver: new Types.ObjectId(receiver),
-                sender: new Types.ObjectId(sender)
+                receiver: receiver,
+                sender: sender
             },
             {
-                receiver: new Types.ObjectId(sender),
-                sender: new Types.ObjectId(receiver)
+                receiver: sender,
+                sender: receiver
             },
         ],
     });
@@ -21,10 +21,10 @@ export const fetchChatsOfUser = async (user_id: string) => {
     return await Chat.find({
         $or: [
             {
-                sender: new Types.ObjectId(user_id)
+                sender: user_id
             },
             {
-                receiver: new Types.ObjectId(user_id),
+                receiver: user_id,
             },
         ],
     });
@@ -33,7 +33,7 @@ export const fetchChatsOfUser = async (user_id: string) => {
 export const create = async (sender: string, receiver: string, messages: Message[]) => {
     let chat = new Chat({
         sender: sender,
-        reciever: receiver,
+        receiver: receiver,
         messages: messages,
     });
     return await chat.save();
