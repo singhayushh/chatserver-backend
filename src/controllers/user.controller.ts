@@ -34,7 +34,7 @@ export const FetchById = async (req: Request, res: Response) => {
 
 export const FetchActive = async (req: Request, res: Response) => {
     try {
-        const user = await userService.fetchByStatus(true);
+        const user = await userService.fetchByStatus(true, req.params.id);
         return res.status(200).json({ user, message: "Success" });
     } catch (err) {
         res.status(500).json({ message: "Server Failure", err });
@@ -43,7 +43,7 @@ export const FetchActive = async (req: Request, res: Response) => {
 
 export const FetchInactive = async (req: Request, res: Response) => {
     try {
-        const user = await userService.fetchByStatus(false);
+        const user = await userService.fetchByStatus(false, req.params.id);
         return res.status(200).json({ user, message: "Success" });
     } catch (err) {
         res.status(500).json({ message: "Server Failure", err });

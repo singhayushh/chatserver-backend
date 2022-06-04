@@ -31,11 +31,12 @@ app.get("/", (_req: express.Request, res: express.Response) =>
     res.send(`${PROJECT_NAME} server started on ${new Date()}`)
 );
 
+// Swagger Documentation
+app.get("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 // Main Router
 app.use("/", mainRouter);
 
-// Swagger Documentation
-app.get("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 const server = http.createServer(app); //Create server with express
 const io = new Server(); //Initialize Socket

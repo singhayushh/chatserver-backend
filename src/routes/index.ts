@@ -10,8 +10,8 @@ mainRouter.use("/broadcast", broadcastRouter);
 mainRouter.use("/chat", chatRouter);
 mainRouter.use("/user", userRouter);
 
-mainRouter.use((req: Request, res: Response) => {
-    res.status(404);
+mainRouter.use((_: Request, res: Response) => {
+    res.status(404).send("Not Found");
 });
 
 export default mainRouter;

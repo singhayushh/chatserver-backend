@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { Message } from "../dtos/chat.dtos";
 import Chat from "../models/chat.model";
 
@@ -5,12 +6,12 @@ export const fetchChatByUser = async (sender: string, receiver: string) => {
     return await Chat.findOne({
         $or: [
             {
-                receiver: receiver,
-                sender: sender
+                receiver: new Types.ObjectId(receiver),
+                sender: new Types.ObjectId(sender)
             },
             {
-                receiver: sender,
-                sender: receiver
+                receiver: new Types.ObjectId(sender),
+                sender: new Types.ObjectId(receiver)
             },
         ],
     });
@@ -20,10 +21,10 @@ export const fetchChatsOfUser = async (user_id: string) => {
     return await Chat.find({
         $or: [
             {
-                sender: user_id
+                sender: new Types.ObjectId(user_id)
             },
             {
-                receiver: user_id,
+                receiver: new Types.ObjectId(user_id),
             },
         ],
     });
