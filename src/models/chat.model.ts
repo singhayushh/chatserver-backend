@@ -3,18 +3,18 @@ import { ChatInterface } from "../dtos/chat.dtos";
 
 const chatSchema: Schema<ChatInterface> = new Schema(
     {
-        sender: Schema.Types.ObjectId, //sender_id
-        receiver: Schema.Types.ObjectId, //reciever_id
+        sender: String, //sender_id
+        receiver: String, //reciever_id
         messages: [
             {
                 text: String, //message_content
                 createdAt: String, //message_creation_time
                 image: String, //message_image_content
                 user: {
-                    _id: String, //sender_id
+                    _id: Schema.Types.ObjectId, //sender_id
                     name: String, //sender_name
                     avatar: String //sender_photo
-                  },
+                },
             }
         ]
     },
