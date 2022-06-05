@@ -4,13 +4,13 @@ import { UserInterface } from "../dtos/user.dtos";
 const userSchema: Schema<UserInterface> = new Schema(
     {
         name: String,
-        id: String,
+        id: { type: String, unique: true, required: true },
         photo: String,
         isActive: {
             type: Boolean,
             default: false
         }
-    }, 
+    },
     {
         timestamps: true
     }

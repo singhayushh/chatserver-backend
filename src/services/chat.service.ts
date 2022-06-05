@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { Message } from "../dtos/chat.dtos";
 import Chat from "../models/chat.model";
 
@@ -32,7 +33,7 @@ export const fetchChatsOfUser = async (user_id: string) => {
 export const create = async (sender: string, receiver: string, messages: Message[]) => {
     let chat = new Chat({
         sender: sender,
-        reciever: receiver,
+        receiver: receiver,
         messages: messages,
     });
     return await chat.save();

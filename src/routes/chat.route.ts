@@ -9,13 +9,13 @@ chatRouter.post(
 );
 
 chatRouter.get(
-    "/:sender/:receiver",
-    chatController.FetchMessages
+    "/chats/:id",
+    chatController.FetchChats
 );
 
 chatRouter.get(
-    "/:id",
-    chatController.FetchChats
+    "/messages/:sender/:receiver",
+    chatController.FetchMessages
 );
 
 export default chatRouter;

@@ -14,12 +14,12 @@ userRouter.get(
 );
 
 userRouter.get(
-    "/active",
+    "/active/:id",
     userController.FetchActive
 );
 
 userRouter.get(
-    "/inactive",
+    "/inactive/:id",
     userController.FetchInactive
 );
 
