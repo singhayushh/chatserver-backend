@@ -38,13 +38,18 @@ app.get("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/", mainRouter);
 
 
-const server = http.createServer(app); //Create server with express
-const io = new Server(); //Initialize Socket
+// Start the express server in the defined port
+const server = app.listen(PORT, () => {
+    connect; // connect to the mongo instance
+    console.log(`Listening on Port ${PORT}...`); // Log on server start up
+});
 
+const io = new Server(server); //Initialize Socket
+io.sockets.emit("hi", "everyone");
 var clients: SocketClientDto[] = []; //connected clients
 
 io.on("connection", (socket) => {
-    console.log("New User Connected");
+    console.log("New User Connected", socket.id);
     socket.on("storeClientInfo", async (data) => {
         console.log(data.customId + " Connected");
         //store the new client
@@ -108,10 +113,4 @@ chatSocket.on("connection", function (socket) {
         //Notify the room
         socket.broadcast.emit("incommingMessage", "reload");
     });
-});
-
-// Start the express server in the defined port
-server.listen(Number(process.env.PORT), () => {
-    connect; // connect to the mongo instance
-    console.log(`Listening on Port ${PORT}...`); // Log on server start up
 });
